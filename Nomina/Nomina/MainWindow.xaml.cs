@@ -26,6 +26,7 @@ namespace Nomina
         public MainWindow()
         {
             this.InitializeComponent();
+            ExtendsContentIntoTitleBar = true;
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
