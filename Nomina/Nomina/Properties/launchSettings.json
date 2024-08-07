@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Nomina (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Nomina (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
