@@ -28,10 +28,5 @@ namespace Nomina
             this.InitializeComponent();
             ExtendsContentIntoTitleBar = true;
         }
-
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
     }
 }
