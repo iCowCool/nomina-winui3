@@ -46,4 +46,19 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="FieldPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="DateHoursPage.xaml" />
+    <None Remove="FieldPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Remove="FieldPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DateHoursPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 </Project>
