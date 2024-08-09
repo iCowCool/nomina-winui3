@@ -7,20 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <ScrollViewer
-            Padding="36,0,36,0"
-            VerticalScrollBarVisibility="Auto"
-            VerticalScrollMode="Enabled">
-            <StackPanel Spacing="25" Margin="36" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock
-                    Margin="36,24,36,0"
-                    Style="{StaticResource TitleTextBlockStyle}"
-                    Text="Calculadora de nómina para la chamba" />
-                <TextBox x:Name="NombreTextBox" Header="Introduzca su nombre" PlaceholderText="Nombre" />
-                <TextBox x:Name="ApellidoTextBox" Header="Introduzca su apellido" PlaceholderText="Apellido" />
-                <TextBox x:Name="NumeroTextBox" Header="Introduzca su número de empleado" PlaceholderText="Número de empleado" />
-                <TextBox x:Name="SueldoHoraTextBox" Header="Introduzca su sueldo por hora" PlaceholderText="Sueldo por hora" />
+    <Grid Padding="20">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="25" Margin="36" >
+                <TextBlock Text="Calculadora de nómina para la chamba" Style="{StaticResource TitleTextBlockStyle}" Margin="0,20,0,10" />
+                <TextBox x:Name="NombreTextBox" Header="Introduzca su nombre" PlaceholderText="Nombre"  Width="300" HorizontalAlignment="Left" />
+                <TextBox x:Name="ApellidoTextBox" Header="Introduzca su apellido" PlaceholderText="Apellido"  Width="300" HorizontalAlignment="Left" />
+                <TextBox x:Name="NumeroTextBox" Header="Introduzca su número de empleado" PlaceholderText="Número de empleado"  Width="300" HorizontalAlignment="Left" />
+                <TextBox x:Name="SueldoHoraTextBox" Header="Introduzca su sueldo por hora" PlaceholderText="Sueldo por hora"  Width="300" HorizontalAlignment="Left" />
                 <Button x:Name="SiguienteButton" Click="SiguienteButtonClick">Siguiente</Button>
             </StackPanel>
         </ScrollViewer>
