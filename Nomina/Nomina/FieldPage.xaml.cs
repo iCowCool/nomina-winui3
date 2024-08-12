@@ -1,7 +1,9 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
+using System.Text.RegularExpressions;
+using System;
 
 namespace Nomina
 {
@@ -54,6 +56,76 @@ namespace Nomina
                 NombreTextBox.Text = EmployeeViewModel.Nombre;
                 ApellidoTextBox.Text = EmployeeViewModel.Apellido;
                 NumeroTextBox.Text = EmployeeViewModel.NumeroEmpleado;
+            }
+        }
+
+        private void ShowErrorWithAnimation(TextBlock errorTextBlock)
+        {
+            errorTextBlock.Visibility = Visibility.Visible;
+            Storyboard storyboard = new Storyboard();
+            DoubleAnimation animation = new DoubleAnimation()
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(0.3)),
+                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
+            };
+            Storyboard.SetTarget(animation, errorTextBlock);
+            Storyboard.SetTargetProperty(animation, "Opacity");
+            storyboard.Children.Add(animation);
+            storyboard.Begin();
+        }
+
+        private void HideErrorWithAnimation(TextBlock errorTextBlock)
+        {
+            Storyboard storyboard = new Storyboard();
+            DoubleAnimation animation = new DoubleAnimation()
+            {
+                From = 1,
+                To = 0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.3)),
+                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
+            };
+            animation.Completed += (s, e) => { errorTextBlock.Visibility = Visibility.Collapsed; };
+            Storyboard.SetTarget(animation, errorTextBlock);
+            Storyboard.SetTargetProperty(animation, "Opacity");
+            storyboard.Children.Add(animation);
+            storyboard.Begin();
+        }
+
+        private void NombreTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Regex.IsMatch(NombreTextBox.Text, @"^[a-zA-Z\s]+$"))
+            {
+                HideErrorWithAnimation(NombreErrorTextBlock);
+            }
+            else
+            {
+                ShowErrorWithAnimation(NombreErrorTextBlock);
+            }
+        }
+
+        private void ApellidoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Regex.IsMatch(ApellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
+            {
+                HideErrorWithAnimation(ApellidoErrorTextBlock);
+            }
+            else
+            {
+                ShowErrorWithAnimation(ApellidoErrorTextBlock);
+            }
+        }
+
+        private void NumeroTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Regex.IsMatch(NumeroTextBox.Text, @"^\d+$"))
+            {
+                HideErrorWithAnimation(NumeroErrorTextBlock);
+            }
+            else
+            {
+                ShowErrorWithAnimation(NumeroErrorTextBlock);
             }
         }
     }
