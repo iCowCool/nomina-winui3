@@ -3,6 +3,9 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Nomina
 {
@@ -30,59 +33,80 @@ namespace Nomina
             Frame.Navigate(typeof(FieldPage), EmployeeViewModel, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
         }
 
-        private void CalcularButtonClick(object sender, RoutedEventArgs e)
+        private async void CalcularButtonClick(object sender, RoutedEventArgs e)
         {
-            double totalHoras = 0;
-            int totalDias = 0;
+            var daysWorked = new Dictionary<string, double>();
 
             if (MondayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (MondayEndTimePicker.Time - MondayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Lunes");
+                daysWorked.Add("Lunes", hours);
             }
             if (TuesdayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (TuesdayEndTimePicker.Time - TuesdayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Martes");
+                daysWorked.Add("Martes", hours);
             }
             if (WednesdayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (WednesdayEndTimePicker.Time - WednesdayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Miércoles");
+                daysWorked.Add("Miércoles", hours);
             }
             if (ThursdayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (ThursdayEndTimePicker.Time - ThursdayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Jueves");
+                daysWorked.Add("Jueves", hours);
             }
             if (FridayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (FridayEndTimePicker.Time - FridayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Viernes");
+                daysWorked.Add("Viernes", hours);
             }
             if (SaturdayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (SaturdayEndTimePicker.Time - SaturdayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Sábado");
+                daysWorked.Add("Sábado", hours);
             }
             if (SundayCheckBox.IsChecked == true)
             {
-                totalDias++;
-                totalHoras += (SundayEndTimePicker.Time - SundayStartTimePicker.Time).TotalHours;
+                double hours = await AskForHoursAsync("Domingo");
+                daysWorked.Add("Domingo", hours);
             }
 
+            // Calcular el total de horas trabajadas y la paga total
+            double totalHoras = daysWorked.Values.Sum();
             double totalPago = totalHoras * EmployeeViewModel.SueldoPorHora;
-            double horasRedondeadas = Math.Round(totalHoras, 1); // Redondea a un decimal
 
-            ContentDialog resultDialog = new ContentDialog()
+            // Pasar los resultados a la nueva página
+            var parameters = new
             {
-                Title = "Resultado de la nómina",
-                Content = $"El empleado {EmployeeViewModel.Nombre} {EmployeeViewModel.Apellido} obtuvo {totalPago:C}. Trabajó un total de {horasRedondeadas} hora(s). Trabajó {totalDias} día(s).",
-                CloseButtonText = "OK",
+                TotalHoras = totalHoras,
+                TotalPago = totalPago,
+                DaysWorked = daysWorked
+            };
+
+            Frame.Navigate(typeof(ResultsPage), parameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        private async Task<double> AskForHoursAsync(string day)
+        {
+            TextBox inputTextBox = new TextBox();
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = $"¿Cuántas horas trabajaste el {day}?",
+                Content = inputTextBox,
+                PrimaryButtonText = "OK",
+                CloseButtonText = "Cancelar",
                 XamlRoot = this.Content.XamlRoot
             };
 
-            resultDialog.ShowAsync();
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary && double.TryParse(inputTextBox.Text, out double hours))
+            {
+                return hours;
+            }
+            return 0;
         }
 
     }

@@ -52,9 +52,15 @@
   <ItemGroup>
     <None Remove="DateHoursPage.xaml" />
     <None Remove="FieldPage.xaml" />
+    <None Remove="ResultsPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Remove="FieldPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ResultsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="DateHoursPage.xaml">

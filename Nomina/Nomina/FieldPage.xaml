@@ -7,16 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!-- Brush to get the system accent color -->
+        <SolidColorBrush x:Key="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
+    </Page.Resources>
+
     <Grid Padding="20">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Spacing="25" Margin="36" >
-                <TextBlock Text="Calculadora de nómina para la chamba" Style="{StaticResource TitleTextBlockStyle}" Margin="0,20,0,10" />
-                <TextBox x:Name="NombreTextBox" Header="Introduzca su nombre" PlaceholderText="Nombre"  Width="300" HorizontalAlignment="Left" />
-                <TextBox x:Name="ApellidoTextBox" Header="Introduzca su apellido" PlaceholderText="Apellido"  Width="300" HorizontalAlignment="Left" />
-                <TextBox x:Name="NumeroTextBox" Header="Introduzca su número de empleado" PlaceholderText="Número de empleado"  Width="300" HorizontalAlignment="Left" />
-                <TextBox x:Name="SueldoHoraTextBox" Header="Introduzca su sueldo por hora" PlaceholderText="Sueldo por hora"  Width="300" HorizontalAlignment="Left" />
-                <Button x:Name="SiguienteButton" Click="SiguienteButtonClick">Siguiente</Button>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Spacing="25" Margin="36" HorizontalAlignment="Left">
+                    <TextBlock Text="Calculadora de nómina para la chamba" Style="{StaticResource TitleTextBlockStyle}" Margin="0,20,0,10" />
+                    <TextBox x:Name="NombreTextBox" Header="Introduzca su nombre" PlaceholderText="Nombre"  Width="300" HorizontalAlignment="Left" />
+                    <TextBox x:Name="ApellidoTextBox" Header="Introduzca su apellido" PlaceholderText="Apellido"  Width="300" HorizontalAlignment="Left" />
+                    <TextBox x:Name="NumeroTextBox" Header="Introduzca su número de empleado" PlaceholderText="Número de empleado"  Width="300" HorizontalAlignment="Left" />
+                    <Button x:Name="ClearButton" Click="ClearButtonClick">Borrar todo</Button>
+                    <Button x:Name="SiguienteButton" Click="SiguienteButtonClick">Siguiente</Button>
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>

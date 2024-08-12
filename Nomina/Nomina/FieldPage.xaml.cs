@@ -14,12 +14,18 @@ namespace Nomina
             this.InitializeComponent();
         }
 
+        private void ClearButtonClick(object sender, RoutedEventArgs e)
+        {
+            NombreTextBox.Text = string.Empty;
+            ApellidoTextBox.Text = string.Empty;
+            NumeroTextBox.Text = string.Empty;
+        }
+
         private void SiguienteButtonClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NombreTextBox.Text) ||
                 string.IsNullOrWhiteSpace(ApellidoTextBox.Text) ||
-                string.IsNullOrWhiteSpace(NumeroTextBox.Text) ||
-                string.IsNullOrWhiteSpace(SueldoHoraTextBox.Text))
+                string.IsNullOrWhiteSpace(NumeroTextBox.Text))
             {
                 ContentDialog missingFieldsDialog = new ContentDialog()
                 {
@@ -35,7 +41,6 @@ namespace Nomina
             EmployeeViewModel.Nombre = NombreTextBox.Text;
             EmployeeViewModel.Apellido = ApellidoTextBox.Text;
             EmployeeViewModel.NumeroEmpleado = NumeroTextBox.Text;
-            EmployeeViewModel.SueldoPorHora = double.Parse(SueldoHoraTextBox.Text);
 
             Frame.Navigate(typeof(DateHoursPage), EmployeeViewModel, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
@@ -49,7 +54,6 @@ namespace Nomina
                 NombreTextBox.Text = EmployeeViewModel.Nombre;
                 ApellidoTextBox.Text = EmployeeViewModel.Apellido;
                 NumeroTextBox.Text = EmployeeViewModel.NumeroEmpleado;
-                SueldoHoraTextBox.Text = EmployeeViewModel.SueldoPorHora.ToString();
             }
         }
     }
