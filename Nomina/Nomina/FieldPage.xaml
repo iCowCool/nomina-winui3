@@ -14,15 +14,15 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Spacing="25" Margin="36" HorizontalAlignment="Left">
+                <StackPanel Grid.Column="0" Grid.Row="0" Spacing="25" Margin="36" HorizontalAlignment="Left">
                     <TextBlock Text="Calculadora de nómina para la chamba" Style="{StaticResource TitleTextBlockStyle}" Margin="0,20,0,10" />
-                    
+
                     <TextBox x:Name="NombreTextBox" Header="Introduzca su nombre" PlaceholderText="Nombre"  Width="300" HorizontalAlignment="Left" TextChanged="NombreTextBox_TextChanged"/>
                     <TextBlock x:Name="NombreErrorTextBlock" Foreground="Red" Visibility="Collapsed" Text="Ingrese un nombre válido." />
 
@@ -32,9 +32,16 @@
                     <TextBox x:Name="NumeroTextBox" Header="Introduzca su número de empleado" PlaceholderText="Número de empleado"  Width="300" HorizontalAlignment="Left" TextChanged="NumeroTextBox_TextChanged"/>
                     <TextBlock x:Name="NumeroErrorTextBlock" Foreground="Red" Visibility="Collapsed" Text="Ingrese un número válido." />
 
-                    <Button x:Name="ClearButton" Click="ClearButtonClick">Borrar todo</Button>
-                    <Button x:Name="SiguienteButton" Click="SiguienteButtonClick">Siguiente</Button>
+                    <Button x:Name="ClearButton" Click="ClearButtonClick" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE74D;" Foreground="Red" Margin="0,0,5,0"/>
+                            <TextBlock Text="Borrar todo" Foreground="Red" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
+
+                <!-- Botón "Siguiente" en la esquina inferior derecha -->
+                <Button Grid.Column="1" Grid.Row="1" x:Name="SiguienteButton" Click="SiguienteButtonClick" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,10,20,0">Siguiente</Button>
             </Grid>
         </ScrollViewer>
     </Grid>

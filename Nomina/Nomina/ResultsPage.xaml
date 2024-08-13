@@ -13,106 +13,133 @@
     </Page.Resources>
 
     <Grid Padding="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <!-- Columna Izquierda (Información del Empleado) -->
-        <StackPanel Grid.Column="0" Margin="36" HorizontalAlignment="Left">
-            <TextBlock Text="Resumen del empleado" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,20"/>
+        <!-- Título -->
+        <TextBlock Text="Resumen del empleado" Style="{StaticResource TitleTextBlockStyle}" Margin="30,30,0,20" Grid.Row="0" HorizontalAlignment="Left"/>
 
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
-                    <TextBlock Text="Nombre:" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Nombre}" Margin="10,0,0,0"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0">
+            <!-- Añadido Margin para espaciado -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Columna Izquierda (Información del Empleado) -->
+            <Border Background="{ThemeResource NavigationViewContentBackground}" 
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
+                    BorderThickness="1" 
+                    CornerRadius="8" 
+                    Padding="16" 
+                    Width="400"
+                    Margin="0,0,20,0"
+                    Grid.Column="0">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
+                        <TextBlock Text="Nombre:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Nombre}" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
+                        <TextBlock Text="Apellido:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Apellido}" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
+                        <TextBlock Text="Número de Empleado:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding NumeroEmpleado}" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
+                        <TextBlock Text="Sueldo por Hora:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SueldoPorHora, Converter={StaticResource CurrencyConverter}}" Margin="10,0,0,0"/>
+                    </StackPanel>
                 </StackPanel>
+            </Border>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
-                    <TextBlock Text="Apellido:" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Apellido}" Margin="10,0,0,0"/>
+            <!-- Columna Derecha (Resumen de Horas y Sueldos) -->
+            <Border Background="{ThemeResource NavigationViewContentBackground}" 
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
+                    BorderThickness="1" 
+                    CornerRadius="8" 
+                    Padding="16" 
+                    Width="400"
+                    Grid.Column="1">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Headers -->
+                        <TextBlock Text="Día" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="Horas" Grid.Row="0" Grid.Column="1" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="Sueldo" Grid.Row="0" Grid.Column="2" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                        <!-- Lunes -->
+                        <TextBlock Text="Lunes" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding LunesHoras}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding LunesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="1" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Martes -->
+                        <TextBlock Text="Martes" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding MartesHoras}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding MartesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="2" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Miércoles -->
+                        <TextBlock Text="Miércoles" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding MiercolesHoras}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding MiercolesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="3" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Jueves -->
+                        <TextBlock Text="Jueves" Grid.Row="4" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding JuevesHoras}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding JuevesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="4" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Viernes -->
+                        <TextBlock Text="Viernes" Grid.Row="5" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding ViernesHoras}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding ViernesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="5" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Sábado -->
+                        <TextBlock Text="Sábado" Grid.Row="6" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding SabadoHoras}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding SabadoSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="6" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Domingo -->
+                        <TextBlock Text="Domingo" Grid.Row="7" Grid.Column="0" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding DomingoHoras}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding DomingoSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,10"/>
+
+                        <!-- Total -->
+                        <TextBlock Text="Total" Grid.Row="8" Grid.Column="0" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding TotalHoras}" Grid.Row="8" Grid.Column="1" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding TotalSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="8" Grid.Column="2" FontWeight="Bold" Margin="0,0,0,10"/>
+                    </Grid>
                 </StackPanel>
+            </Border>
+        </Grid>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,10">
-                    <TextBlock Text="Número de Empleado:" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding NumeroEmpleado}" Margin="10,0,0,0"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,20">
-                    <TextBlock Text="Sueldo por Hora:" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding SueldoPorHora, Converter={StaticResource CurrencyConverter}}" Margin="10,0,0,0"/>
-                </StackPanel>
-            </StackPanel>
-
-            <Button Content="Regresar" Click="RegresarButtonClick" HorizontalAlignment="Left" Margin="0,20,0,0"/>
-        </StackPanel>
-
-        <!-- Columna Derecha (Resumen de Horas y Sueldos) -->
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="36,20,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <!-- Headers -->
-                <TextBlock Text="Día" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="Horas" Grid.Row="0" Grid.Column="1" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="Sueldo" Grid.Row="0" Grid.Column="2" FontWeight="Bold" Margin="0,0,0,10"/>
-
-                <!-- Lunes -->
-                <TextBlock Text="Lunes" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding LunesHoras}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding LunesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="1" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Martes -->
-                <TextBlock Text="Martes" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding MartesHoras}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding MartesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="2" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Miércoles -->
-                <TextBlock Text="Miércoles" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding MiercolesHoras}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding MiercolesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="3" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Jueves -->
-                <TextBlock Text="Jueves" Grid.Row="4" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding JuevesHoras}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding JuevesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="4" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Viernes -->
-                <TextBlock Text="Viernes" Grid.Row="5" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding ViernesHoras}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding ViernesSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="5" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Sábado -->
-                <TextBlock Text="Sábado" Grid.Row="6" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding SabadoHoras}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding SabadoSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="6" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Domingo -->
-                <TextBlock Text="Domingo" Grid.Row="7" Grid.Column="0" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding DomingoHoras}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding DomingoSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,10"/>
-
-                <!-- Total -->
-                <TextBlock Text="Total" Grid.Row="8" Grid.Column="0" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding TotalHoras}" Grid.Row="8" Grid.Column="1" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding TotalSueldo, Converter={StaticResource CurrencyConverter}}" Grid.Row="8" Grid.Column="2" FontWeight="Bold" Margin="0,0,0,10"/>
-            </Grid>
-        </StackPanel>
+        <!-- Botón Regresar en la parte inferior izquierda -->
+        <Button Content="Regresar" Click="RegresarButtonClick" HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="2" Grid.Column="0"/>
+        <!-- Añadido Margin al botón -->
     </Grid>
 </Page>
